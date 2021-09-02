@@ -1,0 +1,803 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<ui version="4.0">
+ <class>MainWindow</class>
+ <widget class="QMainWindow" name="MainWindow">
+  <property name="geometry">
+   <rect>
+    <x>0</x>
+    <y>0</y>
+    <width>846</width>
+    <height>465</height>
+   </rect>
+  </property>
+  <property name="sizePolicy">
+   <sizepolicy hsizetype="Fixed" vsizetype="Fixed">
+    <horstretch>0</horstretch>
+    <verstretch>0</verstretch>
+   </sizepolicy>
+  </property>
+  <property name="windowTitle">
+   <string>CyberDropMe-dl</string>
+  </property>
+  <property name="windowIcon">
+   <iconset resource="ui/res.qrc">
+    <normaloff>:/images/images/mgw.jpg</normaloff>:/images/images/mgw.jpg</iconset>
+  </property>
+  <property name="tabShape">
+   <enum>QTabWidget::Rounded</enum>
+  </property>
+  <widget class="QWidget" name="centralwidget">
+   <property name="styleSheet">
+    <string notr="true">QWidget{
+	color:#8590C8;
+	font: 10pt &quot;Segoe UI&quot;;
+}
+#frame {
+    background-color: #0E161F;
+	border:0px;
+ 	margin:0px;
+}
+#frame_2{
+    background-color: #0F111A;
+}
+QStackedWidget{
+	background-color: #0F111A;
+}
+#frame{
+	margin-right:0px;
+	border:0px;
+	padding-right:0px;
+}
+#frame .QPushButton {	
+	background-position: left center;
+    background-repeat: no-repeat;
+	border: none;
+	border-left: 15px solid transparent;
+	border-right: 0px;
+	margin-right:0px;
+	background-color: transparent;
+	text-align: left;
+	padding-left: 44px;
+}
+#frame .QPushButton:hover {
+	background-color:#1F2233;
+	color:#DDDDDD;
+}
+#frame .QPushButton:pressed {	
+	background-color: #1E3250;
+	color: rgb(255, 255, 255);
+}
+#frame_2 .QPushButton {	
+	border: none;
+	background-color: #0E161F;
+	text-align: center;
+}
+#frame_2 .QPushButton:hover {
+	background-color:#1F2233;
+	color:#DDDDDD;
+}
+#frame_2 .QPushButton:pressed {	
+	background-color: #1E3250;
+	color: rgb(255, 255, 255);
+}
+
+#stackedWidget .QPushButton {	
+	border: none;
+	background-color: #0E161F;
+	text-align: center;
+}
+
+QScrollBar:vertical {
+	border: none;
+	background: rgb(52, 59, 72);
+	width: 7px;
+	margin: 11px 0 11px 0;
+	/*border-radius: 0px;*/
+}
+QScrollBar::handle:vertical {	
+	background: rgb(22,160,255);
+	min-height: 25px;
+	/*border-radius: 4px*/
+}
+QScrollBar::add-line:vertical {
+	border: none;
+	background: rgb(55, 63, 77);	
+	height: 10px;
+	/*border-bottom-left-radius: 4px;
+	border-bottom-right-radius: 4px;*/
+	subcontrol-position: bottom;
+	subcontrol-origin: margin;
+}
+QScrollBar::sub-line:vertical {
+	border: none;
+	background: rgb(55, 63, 77);
+	height: 10px;
+	/*border-top-left-radius: 4px;
+	border-top-right-radius: 4px;*/
+	subcontrol-position: top;
+	subcontrol-origin: margin;
+}
+QScrollBar::up-arrow:vertical, QScrollBar::down-arrow:vertical {
+	background: none;
+}
+
+QScrollBar::add-page:vertical, QScrollBar::sub-page:vertical {
+	background: none;
+}
+QGroupBox {
+    border: 1px solid #0264AF;
+    margin-top: 1px; /* leave space at the top for the title */
+}
+
+QGroupBox::title {
+    subcontrol-origin: margin;
+    subcontrol-position: top left; /* position at the top center */
+    padding: 0 3px;
+}</string>
+   </property>
+   <layout class="QHBoxLayout" name="horizontalLayout">
+    <property name="spacing">
+     <number>0</number>
+    </property>
+    <property name="leftMargin">
+     <number>0</number>
+    </property>
+    <property name="topMargin">
+     <number>0</number>
+    </property>
+    <property name="rightMargin">
+     <number>0</number>
+    </property>
+    <property name="bottomMargin">
+     <number>0</number>
+    </property>
+    <item>
+     <widget class="QFrame" name="frame">
+      <property name="minimumSize">
+       <size>
+        <width>230</width>
+        <height>0</height>
+       </size>
+      </property>
+      <property name="maximumSize">
+       <size>
+        <width>50</width>
+        <height>16777215</height>
+       </size>
+      </property>
+      <property name="styleSheet">
+       <string notr="true"/>
+      </property>
+      <property name="frameShape">
+       <enum>QFrame::StyledPanel</enum>
+      </property>
+      <property name="frameShadow">
+       <enum>QFrame::Raised</enum>
+      </property>
+      <layout class="QVBoxLayout" name="verticalLayout" stretch="0,0,0,0,0">
+       <property name="spacing">
+        <number>0</number>
+       </property>
+       <property name="sizeConstraint">
+        <enum>QLayout::SetDefaultConstraint</enum>
+       </property>
+       <property name="leftMargin">
+        <number>0</number>
+       </property>
+       <property name="topMargin">
+        <number>0</number>
+       </property>
+       <property name="rightMargin">
+        <number>0</number>
+       </property>
+       <property name="bottomMargin">
+        <number>0</number>
+       </property>
+       <item>
+        <widget class="QPushButton" name="pushButton">
+         <property name="minimumSize">
+          <size>
+           <width>0</width>
+           <height>40</height>
+          </size>
+         </property>
+         <property name="maximumSize">
+          <size>
+           <width>16777215</width>
+           <height>40</height>
+          </size>
+         </property>
+         <property name="focusPolicy">
+          <enum>Qt::NoFocus</enum>
+         </property>
+         <property name="styleSheet">
+          <string notr="true">background-image: url(:/icons/icons/cil-menu.png);</string>
+         </property>
+         <property name="text">
+          <string>Hide</string>
+         </property>
+        </widget>
+       </item>
+       <item>
+        <widget class="QPushButton" name="pushButton_2">
+         <property name="minimumSize">
+          <size>
+           <width>0</width>
+           <height>40</height>
+          </size>
+         </property>
+         <property name="maximumSize">
+          <size>
+           <width>16777215</width>
+           <height>40</height>
+          </size>
+         </property>
+         <property name="focusPolicy">
+          <enum>Qt::NoFocus</enum>
+         </property>
+         <property name="styleSheet">
+          <string notr="true">background-image: url(:/icons/icons/cil-data-transfer-down.png);</string>
+         </property>
+         <property name="text">
+          <string>Download</string>
+         </property>
+        </widget>
+       </item>
+       <item>
+        <widget class="QPushButton" name="pushButton_3">
+         <property name="minimumSize">
+          <size>
+           <width>0</width>
+           <height>40</height>
+          </size>
+         </property>
+         <property name="maximumSize">
+          <size>
+           <width>16777215</width>
+           <height>40</height>
+          </size>
+         </property>
+         <property name="focusPolicy">
+          <enum>Qt::NoFocus</enum>
+         </property>
+         <property name="styleSheet">
+          <string notr="true">background-image: url(:/icons/icons/cil-description.png);</string>
+         </property>
+         <property name="text">
+          <string>Log</string>
+         </property>
+        </widget>
+       </item>
+       <item>
+        <spacer name="verticalSpacer">
+         <property name="orientation">
+          <enum>Qt::Vertical</enum>
+         </property>
+         <property name="sizeHint" stdset="0">
+          <size>
+           <width>20</width>
+           <height>40</height>
+          </size>
+         </property>
+        </spacer>
+       </item>
+       <item>
+        <widget class="QPushButton" name="pushButton_4">
+         <property name="minimumSize">
+          <size>
+           <width>0</width>
+           <height>40</height>
+          </size>
+         </property>
+         <property name="maximumSize">
+          <size>
+           <width>16777215</width>
+           <height>40</height>
+          </size>
+         </property>
+         <property name="focusPolicy">
+          <enum>Qt::NoFocus</enum>
+         </property>
+         <property name="styleSheet">
+          <string notr="true">background-image: url(:/icons/icons/cil-user-female.png);</string>
+         </property>
+         <property name="text">
+          <string>About</string>
+         </property>
+        </widget>
+       </item>
+      </layout>
+     </widget>
+    </item>
+    <item>
+     <widget class="QFrame" name="frame_2">
+      <property name="styleSheet">
+       <string notr="true"/>
+      </property>
+      <property name="frameShape">
+       <enum>QFrame::StyledPanel</enum>
+      </property>
+      <property name="frameShadow">
+       <enum>QFrame::Raised</enum>
+      </property>
+      <layout class="QVBoxLayout" name="verticalLayout_2">
+       <property name="bottomMargin">
+        <number>0</number>
+       </property>
+       <item>
+        <widget class="QLabel" name="label_2">
+         <property name="styleSheet">
+          <string notr="true">color:#82aaff;
+font: 11pt &quot;Segoe UI&quot;;</string>
+         </property>
+         <property name="text">
+          <string>Title</string>
+         </property>
+        </widget>
+       </item>
+       <item>
+        <widget class="QStackedWidget" name="stackedWidget">
+         <property name="autoFillBackground">
+          <bool>false</bool>
+         </property>
+         <property name="styleSheet">
+          <string notr="true">background-color: #0F111A;</string>
+         </property>
+         <property name="currentIndex">
+          <number>0</number>
+         </property>
+         <widget class="QWidget" name="page">
+          <layout class="QVBoxLayout" name="verticalLayout_6">
+           <property name="spacing">
+            <number>8</number>
+           </property>
+           <property name="leftMargin">
+            <number>0</number>
+           </property>
+           <property name="topMargin">
+            <number>0</number>
+           </property>
+           <property name="rightMargin">
+            <number>0</number>
+           </property>
+           <property name="bottomMargin">
+            <number>0</number>
+           </property>
+           <item>
+            <layout class="QHBoxLayout" name="horizontalLayout_3">
+             <property name="sizeConstraint">
+              <enum>QLayout::SetMinAndMaxSize</enum>
+             </property>
+             <item>
+              <widget class="QLabel" name="label_3">
+               <property name="sizePolicy">
+                <sizepolicy hsizetype="Preferred" vsizetype="Fixed">
+                 <horstretch>0</horstretch>
+                 <verstretch>0</verstretch>
+                </sizepolicy>
+               </property>
+               <property name="maximumSize">
+                <size>
+                 <width>16777215</width>
+                 <height>30</height>
+                </size>
+               </property>
+               <property name="text">
+                <string>Enter URL(s):</string>
+               </property>
+              </widget>
+             </item>
+             <item>
+              <widget class="QPushButton" name="pushButton_6">
+               <property name="minimumSize">
+                <size>
+                 <width>0</width>
+                 <height>30</height>
+                </size>
+               </property>
+               <property name="maximumSize">
+                <size>
+                 <width>100</width>
+                 <height>16777215</height>
+                </size>
+               </property>
+               <property name="focusPolicy">
+                <enum>Qt::NoFocus</enum>
+               </property>
+               <property name="styleSheet">
+                <string notr="true">QPushButton {	
+	border: none;
+	background-color: #0E161F;
+	text-align: center;
+}
+QPushButton:hover {
+	background-color:#003264;
+	color:#DDDDDD;
+}
+QPushButton:pressed {	
+	background-color: #0264AF;
+	color: rgb(255, 255, 255);
+}</string>
+               </property>
+               <property name="text">
+                <string>Add</string>
+               </property>
+              </widget>
+             </item>
+            </layout>
+           </item>
+           <item>
+            <widget class="QPlainTextEdit" name="plainTextEdit">
+             <property name="maximumSize">
+              <size>
+               <width>16777215</width>
+               <height>90</height>
+              </size>
+             </property>
+             <property name="styleSheet">
+              <string notr="true">border:1px solid #0264AF;</string>
+             </property>
+            </widget>
+           </item>
+           <item>
+            <layout class="QHBoxLayout" name="horizontalLayout_2">
+             <item>
+              <widget class="QLabel" name="label_4">
+               <property name="text">
+                <string>Save at:</string>
+               </property>
+              </widget>
+             </item>
+             <item>
+              <widget class="QLineEdit" name="lineEdit">
+               <property name="styleSheet">
+                <string notr="true">border:1px solid #0264AF;</string>
+               </property>
+              </widget>
+             </item>
+             <item>
+              <widget class="QPushButton" name="pushButton_5">
+               <property name="minimumSize">
+                <size>
+                 <width>86</width>
+                 <height>25</height>
+                </size>
+               </property>
+               <property name="focusPolicy">
+                <enum>Qt::NoFocus</enum>
+               </property>
+               <property name="styleSheet">
+                <string notr="true">QPushButton {	
+	border: none;
+	background-color: #0E161F;
+	text-align: center;
+}
+QPushButton:hover {
+	background-color:#1F2233;
+	color:#DDDDDD;
+}
+QPushButton:pressed {	
+	background-color: #1E3250;
+	color: rgb(255, 255, 255);
+}</string>
+               </property>
+               <property name="text">
+                <string>Browse</string>
+               </property>
+               <property name="icon">
+                <iconset resource="ui/res.qrc">
+                 <normaloff>:/icons/icons/cil-folder-open.png</normaloff>:/icons/icons/cil-folder-open.png</iconset>
+               </property>
+              </widget>
+             </item>
+            </layout>
+           </item>
+           <item>
+            <widget class="QLabel" name="label_10">
+             <property name="maximumSize">
+              <size>
+               <width>16777215</width>
+               <height>50</height>
+              </size>
+             </property>
+             <property name="styleSheet">
+              <string notr="true">color:#0264AF;
+font: 700 11pt &quot;Segoe UI&quot;;
+</string>
+             </property>
+             <property name="text">
+              <string/>
+             </property>
+             <property name="alignment">
+              <set>Qt::AlignCenter</set>
+             </property>
+            </widget>
+           </item>
+           <item>
+            <widget class="QGroupBox" name="groupBox">
+             <property name="styleSheet">
+              <string notr="true"/>
+             </property>
+             <property name="title">
+              <string>Current Threads</string>
+             </property>
+             <layout class="QHBoxLayout" name="horizontalLayout_6">
+              <property name="spacing">
+               <number>1</number>
+              </property>
+              <property name="sizeConstraint">
+               <enum>QLayout::SetMinimumSize</enum>
+              </property>
+              <property name="leftMargin">
+               <number>9</number>
+              </property>
+              <property name="rightMargin">
+               <number>9</number>
+              </property>
+              <property name="bottomMargin">
+               <number>9</number>
+              </property>
+              <item>
+               <layout class="QVBoxLayout" name="verticalLayout_3">
+                <property name="spacing">
+                 <number>2</number>
+                </property>
+                <property name="topMargin">
+                 <number>9</number>
+                </property>
+               </layout>
+              </item>
+              <item>
+               <layout class="QVBoxLayout" name="verticalLayout_4">
+                <property name="spacing">
+                 <number>2</number>
+                </property>
+                <property name="topMargin">
+                 <number>9</number>
+                </property>
+               </layout>
+              </item>
+             </layout>
+            </widget>
+           </item>
+           <item>
+            <widget class="QGroupBox" name="groupBox_2">
+             <property name="styleSheet">
+              <string notr="true"/>
+             </property>
+             <property name="title">
+              <string>Total</string>
+             </property>
+             <layout class="QVBoxLayout" name="verticalLayout_5">
+              <property name="sizeConstraint">
+               <enum>QLayout::SetMaximumSize</enum>
+              </property>
+              <property name="leftMargin">
+               <number>9</number>
+              </property>
+              <property name="rightMargin">
+               <number>9</number>
+              </property>
+              <property name="bottomMargin">
+               <number>9</number>
+              </property>
+              <item>
+               <layout class="QHBoxLayout" name="horizontalLayout_5">
+                <property name="sizeConstraint">
+                 <enum>QLayout::SetFixedSize</enum>
+                </property>
+                <property name="topMargin">
+                 <number>9</number>
+                </property>
+                <item>
+                 <widget class="QLabel" name="label_8">
+                  <property name="maximumSize">
+                   <size>
+                    <width>40</width>
+                    <height>20</height>
+                   </size>
+                  </property>
+                  <property name="text">
+                   <string>URL :</string>
+                  </property>
+                 </widget>
+                </item>
+                <item>
+                 <widget class="QLabel" name="label_9">
+                  <property name="maximumSize">
+                   <size>
+                    <width>16777215</width>
+                    <height>20</height>
+                   </size>
+                  </property>
+                  <property name="text">
+                   <string/>
+                  </property>
+                 </widget>
+                </item>
+               </layout>
+              </item>
+              <item>
+               <layout class="QHBoxLayout" name="horizontalLayout_4">
+                <property name="sizeConstraint">
+                 <enum>QLayout::SetFixedSize</enum>
+                </property>
+                <item>
+                 <widget class="QLabel" name="label_6">
+                  <property name="maximumSize">
+                   <size>
+                    <width>110</width>
+                    <height>16777215</height>
+                   </size>
+                  </property>
+                  <property name="text">
+                   <string>Files Downloaded :</string>
+                  </property>
+                 </widget>
+                </item>
+                <item>
+                 <widget class="QLabel" name="label_7">
+                  <property name="text">
+                   <string/>
+                  </property>
+                 </widget>
+                </item>
+                <item>
+                 <widget class="QPushButton" name="pushButton_7">
+                  <property name="minimumSize">
+                   <size>
+                    <width>0</width>
+                    <height>25</height>
+                   </size>
+                  </property>
+                  <property name="maximumSize">
+                   <size>
+                    <width>80</width>
+                    <height>16777215</height>
+                   </size>
+                  </property>
+                  <property name="focusPolicy">
+                   <enum>Qt::NoFocus</enum>
+                  </property>
+                  <property name="styleSheet">
+                   <string notr="true">QPushButton {	
+	border: none;
+	background-color: #0E161F;
+	text-align: center;
+}
+QPushButton:hover {
+	background-color:#962128;
+	color:#DDDDDD;
+}
+QPushButton:pressed {	
+	background-color: #F04950;
+	color: rgb(255, 255, 255);
+}</string>
+                  </property>
+                  <property name="text">
+                   <string>Stop</string>
+                  </property>
+                 </widget>
+                </item>
+               </layout>
+              </item>
+              <item>
+               <widget class="QProgressBar" name="progressBar">
+                <property name="maximumSize">
+                 <size>
+                  <width>16777215</width>
+                  <height>10</height>
+                 </size>
+                </property>
+                <property name="styleSheet">
+                 <string notr="true">QProgressBar {
+    border: 1px solid #0264AF;
+    border-radius: 0px;
+}
+
+QProgressBar::chunk {
+    background-color: #16A0FF;
+    width: 1px;
+}</string>
+                </property>
+                <property name="value">
+                 <number>24</number>
+                </property>
+                <property name="textVisible">
+                 <bool>false</bool>
+                </property>
+               </widget>
+              </item>
+             </layout>
+            </widget>
+           </item>
+          </layout>
+         </widget>
+         <widget class="QWidget" name="page_2">
+          <layout class="QVBoxLayout" name="verticalLayout_7">
+           <item>
+            <widget class="QGroupBox" name="groupBox_3">
+             <property name="layoutDirection">
+              <enum>Qt::LeftToRight</enum>
+             </property>
+             <property name="title">
+              <string>Log</string>
+             </property>
+             <property name="alignment">
+              <set>Qt::AlignLeading|Qt::AlignLeft|Qt::AlignVCenter</set>
+             </property>
+             <layout class="QVBoxLayout" name="verticalLayout_9">
+              <property name="leftMargin">
+               <number>2</number>
+              </property>
+              <property name="topMargin">
+               <number>15</number>
+              </property>
+              <property name="rightMargin">
+               <number>2</number>
+              </property>
+              <property name="bottomMargin">
+               <number>2</number>
+              </property>
+              <item>
+               <widget class="QListWidget" name="listWidget">
+                <property name="styleSheet">
+                 <string notr="true">border:none;</string>
+                </property>
+                <item>
+                 <property name="text">
+                  <string>log will appear here.</string>
+                 </property>
+                </item>
+               </widget>
+              </item>
+             </layout>
+            </widget>
+           </item>
+          </layout>
+         </widget>
+         <widget class="QWidget" name="page_3">
+          <widget class="QLabel" name="label">
+           <property name="geometry">
+            <rect>
+             <x>150</x>
+             <y>140</y>
+             <width>131</width>
+             <height>51</height>
+            </rect>
+           </property>
+           <property name="text">
+            <string>780x460</string>
+           </property>
+          </widget>
+         </widget>
+        </widget>
+       </item>
+       <item>
+        <widget class="QLabel" name="label_5">
+         <property name="styleSheet">
+          <string notr="true"> QLabel { 
+	font-size: 11px; color: 
+	rgb(113, 126, 149);
+	padding-left: 10px; 
+	padding-right: 10px; 
+	padding-bottom: 2px; }</string>
+         </property>
+         <property name="text">
+          <string>Tip: Paste the url(s) and hit Add.</string>
+         </property>
+        </widget>
+       </item>
+      </layout>
+     </widget>
+    </item>
+   </layout>
+   <zorder>frame_2</zorder>
+   <zorder>frame</zorder>
+  </widget>
+ </widget>
+ <resources>
+  <include location="ui/res.qrc"/>
+ </resources>
+ <connections/>
+</ui>
