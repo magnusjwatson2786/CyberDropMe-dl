@@ -1,17 +1,18 @@
 
-import requests, sys, concurrent.futures,time, os, re, platform
+import sys, concurrent.futures, os
 from PySide6.QtCore import *
 from PySide6.QtGui import *
 from PySide6.QtWidgets import *
 from urlextractor import *
+from validations import *
 from downloader import *
 from dlic import *
 from ui import *
 
 widgets = None
-verbose= True
+verbose= False
 
-# import res_rc
+import res_rc
 
 class GUISignal(QObject):
     signal_val = Signal(int)
@@ -28,7 +29,7 @@ class MainWindow(QMainWindow):
         self.ui.progressBar.setValue(0)
         self.gui_connection = GUISignal()
         # Fxns.toggleMenu(self, True)
-        # Fxns.fxnsdef(self)
+        Fxns.fxnsdef(self)
         
         widgets.pushButton_2.clicked.connect(self.buttonClick)
         widgets.pushButton_3.clicked.connect(self.buttonClick)
@@ -37,7 +38,7 @@ class MainWindow(QMainWindow):
         widgets.pushButton_6.clicked.connect(self.buttonClick)
         self.gui_connection.signal_val.connect(self.ui.progressBar.setValue)
         # widgets.pushButton_6.clicked.connect(self.buttonClick)
-        # widgets.pushButton_7.clicked.connect(self.buttonClick)
+        widgets.pushButton_7.clicked.connect(self.stop)
         # widgets.pushButton_8.clicked.connect(self.buttonClick)
 
         self.show()
@@ -52,6 +53,8 @@ class MainWindow(QMainWindow):
         # widgets.tabWidget.setCurrentWidget(widgets.tab)
         # widgets.pushButton_7.setStyleSheet(Fxns.selectMenu(widgets.pushButton_7.styleSheet()))
 
+        self.fails=[]
+        self.skips=[]
         self.done=0
         self.total=0
         self.title="album"
@@ -61,14 +64,13 @@ class MainWindow(QMainWindow):
         self.nthr=0
         self.mthr=5
         self.br=False
-
         self.q=[]
-        # self.h=[]
+        self.h=[]
+        self.lc=0
         # self.l=[]
         # self.c=0
-        # self.br=False
         self.executor=concurrent.futures.ThreadPoolExecutor()
-        self.setStatus("")
+        self.setStatus("",False)
         self.setdefpath()
         # print(self.getdlpath())
 
@@ -110,22 +112,11 @@ class MainWindow(QMainWindow):
                 self.dlpath=selectedpath
                 widgets.lineEdit.setText(self.dlpath)
 
-
         if btnName == "pushButton_4":
             widgets.stackedWidget.setCurrentWidget(widgets.page_3)
             Fxns.resetStyle(self, btnName)
             btn.setStyleSheet(Fxns.selectMenu(btn.styleSheet()))
             widgets.label_2.setText("About")
-
-    def validateUrl(self, url):
-        regex = re.compile(
-            r'^(?:http|ftp)s?://' # http:// or https://
-            r'(?:(?:[A-Z0-9](?:[A-Z0-9-]{0,61}[A-Z0-9])?\.)+(?:[A-Z]{2,6}\.?|[A-Z0-9-]{2,}\.?)|' #domain...
-            r'localhost|' #localhost...
-            r'\d{1,3}\.\d{1,3}\.\d{1,3}\.\d{1,3})' # ...or ip
-            r'(?::\d+)?' # optional port
-            r'(?:/?|[/?]\S+)$', re.IGNORECASE)
-        return re.match(regex, str(url))
 
     def addurls(self,inpt:str)->None:
         inpt=inpt.split("\n")
@@ -135,65 +126,92 @@ class MainWindow(QMainWindow):
         validpath=is_path_exists_or_creatable(self.dlpath)
         if validpath:
             for i in inpt:
-                if not self.validateUrl(i):
-                    self.setStatus("One or more Invalid Urls.")
+                if not validateUrl(i):
+                    self.setStatus("One or more Invalid Urls.",False)
+                    proceed=False
+                    break
+                if i.split("/")[2]!="cyberdrop.me":
+                    self.setStatus("Enter cyberdrop.me URLs only",False)
                     proceed=False
                     break
             if proceed:
                 self.ui.plainTextEdit.clear()
+                self.setStatus("Added",False)
                 if verbose: print("added")
                 for i in inpt:
                     skip=False
                     if verbose: print("Extracting")
+                    self.log("Extracting")
+                    self.setStatus("Extracting",True)
                     extractlinks(self,i,skip)
                     if skip:
                         if verbose: print("skipping ", i)
+                        self.log("skipping "+i)
+                        self.skips.append(i)
+                        self.setStatus("Skipping",False)
                         continue
-                    if verbose: print("Extraction successful")
+                    if verbose: print("Extraction Finished")
+                    self.setStatus("Extraction Finished",True)
+                    self.log("Extraction Finished")
+                    self.log("Downloading album from "+i)
                     self.ui.label_9.setText(i)
                     self.alpath=os.path.join(self.dlpath,self.title)
                     if not os.path.exists(self.alpath):
                         os.makedirs(self.alpath)
+                        
                     while self.links:
                         if self.nthr<self.mthr:
                             dl=self.links.pop(0)
                             self.q.append(Dlitem(dl[0],dl[1],self))
-                            self.executor.submit(downld,self,self.q[-1],self.alpath)
+                            self.h.append(self.executor.submit(downld,self,self.q[-1],self.alpath))
                             if verbose: print("added")
+                            self.log("Added "+str(dl))
                             self.nthr+=1
+                            self.setStatus(f"Downloading Album {self.title}",True)
+                    self.executor.submit(self.chkfinish)
                     self.ui.groupBox.adjustSize()
+                    self.log("Finished Downloading from "+i)
+                
+                if verbose: print(self.done)
+                if verbose: print(self.total)
+                # while not self.done==self.total:
+                #     self.setStatus("Downloading",True)
+                # self.setStatus("Downloads Added",True)
         else:
-            self.setStatus("Invalid Download Destination")
+            self.setStatus("Invalid Download Destination",False)
                 
     def stop(self)->None:
         self.br=True
     
-    def setStatus(self,stat)->None:
-        self.ui.label_10.setText(str(stat))
+    def setStatus(self,stat:str,det:bool)->None:
+        x=stat
+        if det:
+            if len(self.skips):
+                x+=f", {len(self.skips)} URL(s) skipped"
+            if len(self.fails):
+                x+=f", {len(self.fails)} download(s) failed"
+        self.ui.label_10.setText(str(x))
+    
+    def log(self,txt:str)->None:
+        QListWidgetItem(txt, widgets.listWidget)
+        # print(widgets.listWidget.count())
+        if int(widgets.listWidget.count())>Config.LOG_BUFFER_SIZE:
+            # print("del trigger")
+            itemtodel=widgets.listWidget.item(0)
+            widgets.listWidget.takeItem(0)
+            del itemtodel
+
+    def chkfinish(self)->None:
+        while not self.done==self.total:
+            self.setStatus("Downloading",True)
+        self.setStatus("Downloads Finished",True)
+        self.log("Finished")
 
 if __name__ == "__main__":
     app = QApplication(sys.argv)
-    app.setWindowIcon(QIcon("icon.ico"))
+    # app.setWindowIcon(QIcon("mgw.ico"))
     app.setStyle("Fusion")
-
-    dark_palette = QPalette()
-
-    dark_palette.setColor(QPalette.Window, QColor(53, 53, 53))
-    dark_palette.setColor(QPalette.WindowText, QColor(255,255,255))
-    dark_palette.setColor(QPalette.Base, QColor(25, 25, 25))
-    dark_palette.setColor(QPalette.AlternateBase, QColor(53, 53, 53))
-    dark_palette.setColor(QPalette.ToolTipBase, QColor(255,255,255))
-    dark_palette.setColor(QPalette.ToolTipText, QColor(255,255,255))
-    dark_palette.setColor(QPalette.Text, QColor(255,255,255))
-    dark_palette.setColor(QPalette.Button, QColor(53, 53, 53))
-    dark_palette.setColor(QPalette.ButtonText, QColor(255,255,255))
-    dark_palette.setColor(QPalette.BrightText, QColor(255, 0, 0))
-    dark_palette.setColor(QPalette.Link, QColor(42, 130, 218))
-    dark_palette.setColor(QPalette.Highlight, QColor(142,45,197).lighter())
-    dark_palette.setColor(QPalette.HighlightedText, QColor(0, 0, 0))
-
     # app.setPalette(dark_palette)
     app.setStyleSheet("QToolTip { color: #ffffff; background-color: #2a82da; border: 1px solid white; }")
     window = MainWindow()
-    app.setPalette(dark_palette)
     sys.exit(app.exec())
