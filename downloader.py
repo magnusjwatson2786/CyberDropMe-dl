@@ -1,10 +1,23 @@
-import requests, sys, os, errno
-verbose=True
+from dlic import Dlitem
+import requests, sys, os
 
-def downld(self,dlclass,dldir):
+verbose=False
+
+def downld(self,dlclass:Dlitem,dldir:str)->None:
         # if verbose: print(dlclass.br)
         fpath=os.path.join(dldir,str(dlclass.filename))
         if verbose: print(fpath)
+
+        if dlclass.flen in range(0,(1024*1024)+1):
+            dlclass.csize=100*1024
+        elif dlclass.flen in range((1024*1024)+1,(10*1024*1024)+1):
+            dlclass.csize=512*1024
+        elif dlclass.flen in range((10*1024*1024)+1,(512*1024*1024)+1):
+            dlclass.csize=1024*1024
+        else:
+            dlclass.csize=5*1024*1024
+        if verbose: print(dlclass.csize)
+
         headers={}
         loop=1
         if verbose: print("thread initiated")
@@ -37,6 +50,19 @@ def downld(self,dlclass,dldir):
             except:
                 print("Oops!", sys.exc_info()[0], f"Cant download {dlclass.filename}")
                 otf.close()
+                os.remove(fpath)
+                self.nthr-=1
+                dlclass.nlabel.deleteLater()
+                dlclass.plabel.deleteLater()
+                self.done+=1
+                if verbose: print(self.total)
+                # print(self.total)
+                self.ui.label_7.setText(f"{self.done}/{self.total}")
+                self.gui_connection.signal_val.emit(int((self.done/self.total)*100))
+                # self.ui.progressBar.setValue(int((self.done/self.total)*100))
+                if verbose: print(f"download thread for {dlclass.filename} has been terminated")
+                self.fails.append(dlclass.filename)
+                del dlclass
                 return
             else:
                 a=0
@@ -71,43 +97,6 @@ def downld(self,dlclass,dldir):
         self.gui_connection.signal_val.emit(int((self.done/self.total)*100))
         # self.ui.progressBar.setValue(int((self.done/self.total)*100))
         if verbose: print(f"download thread for {dlclass.filename} has been terminated")
+        del dlclass
+        return
 
-ERROR_INVALID_NAME = 123
-
-def is_pathname_valid(pathname: str) -> bool:
-    
-    try:
-        if not isinstance(pathname, str) or not pathname:
-            return False
-
-        _, pathname = os.path.splitdrive(pathname)
-
-        root_dirname = os.environ.get('HOMEDRIVE', 'C:') \
-            if sys.platform == 'win32' else os.path.sep
-        assert os.path.isdir(root_dirname) 
-        root_dirname = root_dirname.rstrip(os.path.sep) + os.path.sep
-
-        for pathname_part in pathname.split(os.path.sep):
-            try:
-                os.lstat(root_dirname + pathname_part)
-            except OSError as exc:
-                if hasattr(exc, 'winerror'):
-                    if exc.winerror == ERROR_INVALID_NAME:
-                        return False
-                elif exc.errno in {errno.ENAMETOOLONG, errno.ERANGE}:
-                    return False
-    except TypeError as exc:
-        return False
-    else:
-        return True
-
-def is_path_creatable(pathname: str) -> bool:
-    dirname = os.path.dirname(pathname) or os.getcwd()
-    return os.access(dirname, os.W_OK)
-
-def is_path_exists_or_creatable(pathname: str) -> bool:
-    try:
-        return is_pathname_valid(pathname) and (
-            os.path.exists(pathname) or is_path_creatable(pathname))
-    except OSError:
-        return False
