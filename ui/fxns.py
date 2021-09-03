@@ -74,7 +74,7 @@ class Fxns(MainWindow):
             self.ui.centralwidget.setStyleSheet(str)
 
     def fxnsdef(self):
-        pass
+        # pass
         # def dobleClickMaximizeRestore(event):
         #     if event.type() == QEvent.MouseButtonDblClick:
         #         QTimer.singleShot(250, lambda: Fxns.maximize_restore(self))
@@ -107,4 +107,5 @@ class Fxns(MainWindow):
         # self.ui.pushButton_3.clicked.connect(lambda: self.showMinimized())
         # self.ui.pushButton_2.clicked.connect(lambda: Fxns.maximize_restore(self))
         # self.ui.pushButton.clicked.connect(lambda: self.close())
-        # self.setMinimumSize(900,600)
+        self.setMinimumSize(850,510)
+        self.setMaximumSize(850,510)

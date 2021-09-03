@@ -1,7 +1,7 @@
 # -*- coding: utf-8 -*-
 
 ################################################################################
-## Form generated from reading UI file 'cdmzXWhza.ui'
+## Form generated from reading UI file 'cdmrVthrV.ui'
 ##
 ## Created by: Qt User Interface Compiler version 6.1.2
 ##
@@ -18,7 +18,7 @@ class Ui_MainWindow(object):
     def setupUi(self, MainWindow):
         if not MainWindow.objectName():
             MainWindow.setObjectName(u"MainWindow")
-        MainWindow.resize(846, 465)
+        MainWindow.resize(850, 510)
         sizePolicy = QSizePolicy(QSizePolicy.Fixed, QSizePolicy.Fixed)
         sizePolicy.setHorizontalStretch(0)
         sizePolicy.setVerticalStretch(0)
@@ -27,6 +27,7 @@ class Ui_MainWindow(object):
         icon = QIcon()
         icon.addFile(u":/images/images/mgw.jpg", QSize(), QIcon.Normal, QIcon.Off)
         MainWindow.setWindowIcon(icon)
+        MainWindow.setIconSize(QSize(36, 36))
         MainWindow.setTabShape(QTabWidget.Rounded)
         self.centralwidget = QWidget(MainWindow)
         self.centralwidget.setObjectName(u"centralwidget")
@@ -69,26 +70,29 @@ class Ui_MainWindow(object):
 "	background-color: #1E3250;\n"
 "	color: rgb(255, 255, 255);\n"
 "}\n"
-"#frame_2 .QPushButton {	\n"
+"/*\n"
+"background-color: #0E161F;\n"
+"*/\n"
+"QPushButton {	\n"
 "	border: none;\n"
-"	background-color: #0E161F;\n"
+"	background-color: #020817;\n"
 "	text-align: center;\n"
 "}\n"
-"#frame_2 .QPushButton:hover {\n"
-"	background-color:#1F2233;\n"
-""
-                        "	color:#DDDDDD;\n"
+"QPushButton:hover {\n"
+"	backg"
+                        "round-color:#003264;\n"
+"	color:#DDDDDD;\n"
 "}\n"
-"#frame_2 .QPushButton:pressed {	\n"
-"	background-color: #1E3250;\n"
+"QPushButton:pressed {	\n"
+"	background-color: #0264AF;\n"
 "	color: rgb(255, 255, 255);\n"
 "}\n"
-"\n"
 "#stackedWidget .QPushButton {	\n"
 "	border: none;\n"
 "	background-color: #0E161F;\n"
 "	text-align: center;\n"
 "}\n"
+"\n"
 "\n"
 "QScrollBar:vertical {\n"
 "	border: none;\n"
@@ -117,9 +121,9 @@ class Ui_MainWindow(object):
 "	height: 10px;\n"
 "	/*border-top-left-radius: 4px;\n"
 "	border-top-right-radius: 4px;*/\n"
-"	subcontrol-position: top;\n"
-"	subcont"
-                        "rol-origin: margin;\n"
+"	subcontrol-position: to"
+                        "p;\n"
+"	subcontrol-origin: margin;\n"
 "}\n"
 "QScrollBar::up-arrow:vertical, QScrollBar::down-arrow:vertical {\n"
 "	background: none;\n"
@@ -129,13 +133,15 @@ class Ui_MainWindow(object):
 "	background: none;\n"
 "}\n"
 "QGroupBox {\n"
+"	background-color: #090B10;\n"
 "    border: 1px solid #0264AF;\n"
 "    margin-top: 1px; /* leave space at the top for the title */\n"
 "}\n"
 "\n"
 "QGroupBox::title {\n"
 "    subcontrol-origin: margin;\n"
-"    subcontrol-position: top left; /* position at the top center */\n"
+"    subcontrol-position: top center; /* position at the top center */\n"
+"	margin-top:0px;\n"
 "    padding: 0 3px;\n"
 "}")
         self.horizontalLayout = QHBoxLayout(self.centralwidget)
@@ -144,7 +150,7 @@ class Ui_MainWindow(object):
         self.horizontalLayout.setContentsMargins(0, 0, 0, 0)
         self.frame = QFrame(self.centralwidget)
         self.frame.setObjectName(u"frame")
-        self.frame.setMinimumSize(QSize(230, 0))
+        self.frame.setMinimumSize(QSize(50, 0))
         self.frame.setMaximumSize(QSize(50, 16777215))
         self.frame.setStyleSheet(u"")
         self.frame.setFrameShape(QFrame.StyledPanel)
@@ -241,9 +247,12 @@ class Ui_MainWindow(object):
         self.pushButton_6.setMinimumSize(QSize(0, 30))
         self.pushButton_6.setMaximumSize(QSize(100, 16777215))
         self.pushButton_6.setFocusPolicy(Qt.NoFocus)
-        self.pushButton_6.setStyleSheet(u"QPushButton {	\n"
+        self.pushButton_6.setStyleSheet(u"/*\n"
+"background-color: #0E161F;\n"
+"*/\n"
+"QPushButton {	\n"
 "	border: none;\n"
-"	background-color: #0E161F;\n"
+"	background-color: #020817;\n"
 "	text-align: center;\n"
 "}\n"
 "QPushButton:hover {\n"
@@ -263,7 +272,22 @@ class Ui_MainWindow(object):
         self.plainTextEdit = QPlainTextEdit(self.page)
         self.plainTextEdit.setObjectName(u"plainTextEdit")
         self.plainTextEdit.setMaximumSize(QSize(16777215, 90))
-        self.plainTextEdit.setStyleSheet(u"border:1px solid #0264AF;")
+        self.plainTextEdit.setFocusPolicy(Qt.ClickFocus)
+        self.plainTextEdit.setStyleSheet(u"/*border:1px solid #0264AF;	selection-color: rgb(255, 255, 255);*/\n"
+"\n"
+"QPlainTextEdit {\n"
+"	background-color: #090B10;\n"
+"	padding: 10px;\n"
+"	border:none;\n"
+"	selection-background-color: rgb(22, 160, 255);\n"
+"}\n"
+"QPlainTextEdit:hover {\n"
+"	border: 1px solid #0264AF ;\n"
+"}\n"
+"QPlainTextEdit:focus {\n"
+"	border: 1px solid #0264AF;\n"
+"}\n"
+"")
 
         self.verticalLayout_6.addWidget(self.plainTextEdit)
 
@@ -276,7 +300,20 @@ class Ui_MainWindow(object):
 
         self.lineEdit = QLineEdit(self.page)
         self.lineEdit.setObjectName(u"lineEdit")
-        self.lineEdit.setStyleSheet(u"border:1px solid #0264AF;")
+        self.lineEdit.setFocusPolicy(Qt.ClickFocus)
+        self.lineEdit.setStyleSheet(u"/*border:1px solid #0264AF;	border-radius: 5px;	padding: 10px;*/\n"
+"QLineEdit {\n"
+"	background-color: #090B10;\n"
+"	border:none;\n"
+"	selection-background-color: rgb(22, 160, 255);\n"
+"}\n"
+"QLineEdit:hover {\n"
+"	border: 1px solid #0264AF ;\n"
+"}\n"
+"QLineEdit:focus {\n"
+"	border: 1px solid #0264AF ;\n"
+"}\n"
+"")
 
         self.horizontalLayout_2.addWidget(self.lineEdit)
 
@@ -284,17 +321,20 @@ class Ui_MainWindow(object):
         self.pushButton_5.setObjectName(u"pushButton_5")
         self.pushButton_5.setMinimumSize(QSize(86, 25))
         self.pushButton_5.setFocusPolicy(Qt.NoFocus)
-        self.pushButton_5.setStyleSheet(u"QPushButton {	\n"
+        self.pushButton_5.setStyleSheet(u"/*\n"
+"background-color: #0E161F;\n"
+"*/\n"
+"QPushButton {	\n"
 "	border: none;\n"
-"	background-color: #0E161F;\n"
+"	background-color: #020817;\n"
 "	text-align: center;\n"
 "}\n"
 "QPushButton:hover {\n"
-"	background-color:#1F2233;\n"
+"	background-color:#003264;\n"
 "	color:#DDDDDD;\n"
 "}\n"
 "QPushButton:pressed {	\n"
-"	background-color: #1E3250;\n"
+"	background-color: #0264AF;\n"
 "	color: rgb(255, 255, 255);\n"
 "}")
         icon1 = QIcon()
@@ -318,7 +358,8 @@ class Ui_MainWindow(object):
 
         self.groupBox = QGroupBox(self.page)
         self.groupBox.setObjectName(u"groupBox")
-        self.groupBox.setStyleSheet(u"")
+        self.groupBox.setStyleSheet(u"	background-color: #090B10;\n"
+"	/*border:none;")
         self.horizontalLayout_6 = QHBoxLayout(self.groupBox)
         self.horizontalLayout_6.setSpacing(1)
         self.horizontalLayout_6.setObjectName(u"horizontalLayout_6")
@@ -343,7 +384,8 @@ class Ui_MainWindow(object):
 
         self.groupBox_2 = QGroupBox(self.page)
         self.groupBox_2.setObjectName(u"groupBox_2")
-        self.groupBox_2.setStyleSheet(u"")
+        self.groupBox_2.setStyleSheet(u"/*	background-color: #090B10;\n"
+"	/*border:none;")
         self.verticalLayout_5 = QVBoxLayout(self.groupBox_2)
         self.verticalLayout_5.setObjectName(u"verticalLayout_5")
         self.verticalLayout_5.setSizeConstraint(QLayout.SetMaximumSize)
@@ -386,17 +428,20 @@ class Ui_MainWindow(object):
         self.pushButton_7.setMinimumSize(QSize(0, 25))
         self.pushButton_7.setMaximumSize(QSize(80, 16777215))
         self.pushButton_7.setFocusPolicy(Qt.NoFocus)
-        self.pushButton_7.setStyleSheet(u"QPushButton {	\n"
+        self.pushButton_7.setStyleSheet(u"/*\n"
+"background-color: #0E161F;\n"
+"*/\n"
+"QPushButton {	\n"
 "	border: none;\n"
-"	background-color: #0E161F;\n"
+"	background-color: #020817;\n"
 "	text-align: center;\n"
 "}\n"
 "QPushButton:hover {\n"
-"	background-color:#962128;\n"
+"	background-color:#003264;\n"
 "	color:#DDDDDD;\n"
 "}\n"
 "QPushButton:pressed {	\n"
-"	background-color: #F04950;\n"
+"	background-color: #0264AF;\n"
 "	color: rgb(255, 255, 255);\n"
 "}")
 
@@ -450,9 +495,17 @@ class Ui_MainWindow(object):
         self.stackedWidget.addWidget(self.page_2)
         self.page_3 = QWidget()
         self.page_3.setObjectName(u"page_3")
+        self.verticalLayout_8 = QVBoxLayout(self.page_3)
+        self.verticalLayout_8.setObjectName(u"verticalLayout_8")
         self.label = QLabel(self.page_3)
         self.label.setObjectName(u"label")
-        self.label.setGeometry(QRect(150, 140, 131, 51))
+        self.label.setAlignment(Qt.AlignLeading|Qt.AlignLeft|Qt.AlignTop)
+        self.label.setWordWrap(True)
+        self.label.setMargin(25)
+        self.label.setOpenExternalLinks(True)
+
+        self.verticalLayout_8.addWidget(self.label)
+
         self.stackedWidget.addWidget(self.page_3)
 
         self.verticalLayout_2.addWidget(self.stackedWidget)
@@ -477,7 +530,7 @@ class Ui_MainWindow(object):
 
         self.retranslateUi(MainWindow)
 
-        self.stackedWidget.setCurrentIndex(0)
+        self.stackedWidget.setCurrentIndex(2)
 
 
         QMetaObject.connectSlotsByName(MainWindow)
@@ -492,6 +545,7 @@ class Ui_MainWindow(object):
         self.label_2.setText(QCoreApplication.translate("MainWindow", u"Title", None))
         self.label_3.setText(QCoreApplication.translate("MainWindow", u"Enter URL(s):", None))
         self.pushButton_6.setText(QCoreApplication.translate("MainWindow", u"Add", None))
+        self.plainTextEdit.setPlaceholderText("")
         self.label_4.setText(QCoreApplication.translate("MainWindow", u"Save at:", None))
         self.pushButton_5.setText(QCoreApplication.translate("MainWindow", u"Browse", None))
         self.label_10.setText("")
@@ -510,7 +564,8 @@ class Ui_MainWindow(object):
         ___qlistwidgetitem.setText(QCoreApplication.translate("MainWindow", u"log will appear here.", None));
         self.listWidget.setSortingEnabled(__sortingEnabled)
 
-        self.label.setText(QCoreApplication.translate("MainWindow", u"780x460", None))
+        self.label.setText(QCoreApplication.translate("MainWindow", u"<html><head/><body><p align=\"center\"><span style=\" font-size:12pt; font-weight:600; color:#16a0ff;\">CyberDropMe-dl</span></p><p align=\"center\"><span style=\" color:#8590c8;\">A downloader GUI for downloading files from the </span><a href=\"https://cyberdrop.me/\"><span style=\" text-decoration: underline; color:#0264af;\">Cyberdrop</span></a><span style=\" color:#8590c8;\"> file hosting service created using Python and PySide6 (support for PyQt), and with colors based on the Deep Ocean theme by </span><a href=\"https://material-theme.com/docs/reference/color-palette\"><span style=\" text-decoration: underline; color:#0264af;\">Material UI Theme</span></a><span style=\" color:#8590c8;\">.</span></p><p align=\"center\"><span style=\" color:#8590c8;\">MIT License</span></p><p align=\"center\"><span style=\" color:#16a0ff;\">Created by: </span><a href=\"https://github.com/magnusjwatson2786\"><span style=\" text-decoration: underline; color:#0264af;\">magnusjwatson2786</span></a><span style=\" color:#16a0ff;\""
+                        "> @GitHub</span></p><p align=\"center\"><br/></p><p align=\"right\"><a href=\"https://github.com/magnusjwatson2786/CyberDropMe-dl\"><span style=\" text-decoration: underline; color:#0264af;\">GitHub Repository</span></a></p><p align=\"right\"><a href=\"https://github.com/magnusjwatson2786/CyberDropMe-dl/releases\"><span style=\" text-decoration: underline; color:#0264af;\">Releases</span></a></p><p align=\"right\"><a href=\"https://github.com/magnusjwatson2786/CyberDropMe-dl/issues/new\"><span style=\" text-decoration: underline; color:#0264af;\">Report an issue</span></a></p><p align=\"right\"><br/></p><p align=\"center\"><br/></p></body></html>", None))
         self.label_5.setText(QCoreApplication.translate("MainWindow", u"Tip: Paste the url(s) and hit Add.", None))
     # retranslateUi
 
