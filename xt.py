@@ -207,6 +207,10 @@ class MainWindow(QMainWindow):
         self.setStatus("Downloads Finished",True)
         self.log("Finished")
 
+    def closeEvent(self, event):
+	self.br=True
+        event.accept()
+
 if __name__ == "__main__":
     app = QApplication(sys.argv)
     # app.setWindowIcon(QIcon("mgw.ico"))
