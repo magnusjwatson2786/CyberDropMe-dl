@@ -208,7 +208,7 @@ class MainWindow(QMainWindow):
         self.log("Finished")
 
     def closeEvent(self, event):
-	self.br=True
+        self.br=True
         event.accept()
 
 if __name__ == "__main__":
